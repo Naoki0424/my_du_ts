@@ -8,22 +8,12 @@
     >
       <menu-button :active=true :targetView="'pandas'" :buttonText="'Pandas'" />
       <menu-button :active=false :targetView="'curl'" :buttonText="'Curl'" />
+      <menu-button :active=false :targetView="'flow'" :buttonText="'Flow'" />
     </div>
     <div class="tab-content" id="tabContent">
-      <div
-        class="tab-pane fade show active"
-        id="pandas"
-        role="tabpanel"
-      >
-      Pandas
-      </div>
-      <div
-        class="tab-pane fade show"
-        id="curl"
-        role="tabpanel"
-      >
-      Curl
-      </div>
+      <content-pandas-view :id="'pandas'" :active="true"/>
+      <content-pandas-view :id="'curl'"/>
+      <content-pandas-view :id="'flow'"/>
     </div>
   </div>
 </template>
@@ -31,11 +21,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import MenuButton from "@/components/atoms/MenuButton.vue";
+import ContentPandasView from "@/components/organisms/ContentPandasView.vue";
 
 export default defineComponent({
   name: "Menu",
   components: {
     MenuButton,
+    ContentPandasView
   },
 });
 </script>
