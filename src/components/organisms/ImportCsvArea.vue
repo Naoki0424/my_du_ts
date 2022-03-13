@@ -69,14 +69,9 @@ export default defineComponent({
         alert("エラーです");
       }
     };
-    const dragEnter = () => {
-      console.log("dragEnter");
-    };
-    const changeCsvtab = (index: number) => {
-      activeCsvTabIndex.value = index;
-    };
+    const dragEnter = () => console.log("dragEnter");
+    const changeCsvtab = (index: number) => activeCsvTabIndex.value = index;
 
-    // return { dropCsvFile };
     return {
       inputCsvList,
       activeCsvTabIndex,
