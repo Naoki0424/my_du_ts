@@ -13,29 +13,62 @@
       @drop.prevent="dropCsvFile"
     >
       <div v-if="inputCsvList.length == 0">ファイルアップロード</div>
-      <div v-else>テスト</div>
+      <div v-else>
+        <ul class="nav nav-tabs p-3" id="myTab" role="tablist">
+          <li
+            class="nav-item"
+            role="presentation"
+            v-for="(value, index) in inputCsvList"
+            :key="index"
+          >
+            <button
+              class="nav-link"
+              :class="{ active: index == 0 }"
+              :id="value.name + index"
+              data-bs-toggle="tab"
+              type="button"
+              role="tab"
+              @click="changeCsvtab(index)"
+            >
+              {{ value.name }}
+            </button>
+          </li>
+        </ul>
+        <div
+          class="tab-content"
+          id="myTabContent"
+          v-for="(value, index) in inputCsvList"
+          :key="index"
+        >
+          <normal-table
+            :index="index"
+            :csvData="value"
+            :activeCsvTabIndex="activeCsvTabIndex"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-// import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { CsvType } from "@/types/types";
 import { dropFile } from "@/logic/csvCommon";
+import NormalTable from "@/components/atoms/NormalTable.vue";
 
 export default defineComponent({
+  components: { NormalTable },
   name: "ImportCsvArea",
   setup() {
     // data
     let inputCsvList = reactive<Array<CsvType>>([]);
-    // let activeCsvTabIndex = ref(0);
+    let activeCsvTabIndex = ref(0);
 
     // method
     const dropCsvFile = async (e: DragEvent) => {
       const csv = await dropFile(e);
       if (csv) {
-        alert("成功です");
         inputCsvList.push(csv);
       } else {
         alert("エラーです");
@@ -44,9 +77,18 @@ export default defineComponent({
     const dragEnter = () => {
       console.log("dragEnter");
     };
+    const changeCsvtab = (index: number) => {
+      activeCsvTabIndex.value = index;
+    };
 
     // return { dropCsvFile };
-    return { inputCsvList, dropCsvFile, dragEnter };
+    return {
+      inputCsvList,
+      activeCsvTabIndex,
+      dropCsvFile,
+      dragEnter,
+      changeCsvtab,
+    };
   },
 });
 </script>
