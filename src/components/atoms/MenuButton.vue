@@ -5,9 +5,12 @@
       'active': active
     }"
     data-bs-toggle="pill"
-    :data-bs-target="'#' + targetView"
+    :data-bs-target="targetView"
+    :aria-controls="targetView"
     type="button"
     role="tab"
+    :aria-selected="active"
+    @click="changeCsvtab"
   >
     {{buttonText}}
   </button>
@@ -18,6 +21,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "MenuButton",
+  emits: ['changeCsvtab'],
   props: {
     active: {
       type: Boolean,
@@ -30,7 +34,17 @@ export default defineComponent({
     buttonText: {
         type: String,
         default: "Default"
+    },
+    index: {
+      type: Number,
+      required: true
     }
+  },
+  setup(props, context) {
+    const click = () => {
+      context.emit('changeCsvtab', props.index)
+    }
+    return {click}
   }
 });
 </script>
