@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex align-items-start">
     <div
-      class="nav flex-column nav-pills me-3"
+      class="nav nav-tabs flex-column nav-pills me-3"
       id="v-pills-tab"
       role="tablist"
       aria-orientation="vertical"
@@ -12,8 +12,6 @@
     </div>
     <div class="tab-content" id="tabContent">
       <content-pandas-view :id="'pandas'" :active="true"/>
-      <content-pandas-view :id="'curl'"/>
-      <content-pandas-view :id="'flow'"/>
     </div>
   </div>
 </template>

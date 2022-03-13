@@ -21,29 +21,23 @@
             v-for="(value, index) in inputCsvList"
             :key="index"
           >
-            <button
-              class="nav-link"
-              :class="{ active: index == 0 }"
-              :id="value.name + index"
-              data-bs-toggle="tab"
-              type="button"
-              role="tab"
+            <menu-button
+              :active="index == activeCsvTabIndex"
+              :buttonText="value.name"
+              :targetView="value.name + index"
+              :index="index"
               @click="changeCsvtab(index)"
-            >
-              {{ value.name }}
-            </button>
+            />
           </li>
         </ul>
-        <div
-          class="tab-content"
-          id="myTabContent"
-          v-for="(value, index) in inputCsvList"
-          :key="index"
-        >
+        <div class="tab-content">
           <normal-table
-            :index="index"
+            class="tab-pane fade"
+            :class="{ 'show active': index == activeCsvTabIndex }"
+            :id="value.name + index"
+            v-for="(value, index) in inputCsvList"
+            :key="index"
             :csvData="value"
-            :activeCsvTabIndex="activeCsvTabIndex"
           />
         </div>
       </div>
@@ -56,9 +50,10 @@ import { defineComponent, reactive, ref } from "vue";
 import { CsvType } from "@/types/types";
 import { dropFile } from "@/logic/csvCommon";
 import NormalTable from "@/components/atoms/NormalTable.vue";
+import MenuButton from "@/components/atoms/MenuButton.vue";
 
 export default defineComponent({
-  components: { NormalTable },
+  components: { NormalTable, MenuButton },
   name: "ImportCsvArea",
   setup() {
     // data

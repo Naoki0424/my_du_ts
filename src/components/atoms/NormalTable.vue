@@ -1,9 +1,6 @@
 <template>
   <div
-    class="tab-pane fade"
-    :class="{ 'show active': index == activeCsvTabIndex }"
     :id="csvData.name + index"
-    role="tabpanel"
   >
     <table class="table table-hover">
       <thead>
@@ -31,14 +28,6 @@ import { CsvType } from "@/types/types";
 export default defineComponent({
   name: "NormalTable",
   props: {
-    index: {
-      type: Number,
-      required: true,
-    },
-    activeCsvTabIndex: {
-      type: Number,
-      required: true,
-    },
     csvData: {
       type: CsvType,
       default: "Default",
