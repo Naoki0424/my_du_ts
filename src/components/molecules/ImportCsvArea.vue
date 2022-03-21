@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import { CsvType } from "@/types/types";
 import NormalTable from "@/components/atoms/NormalTable.vue";
 import MenuButton from "@/components/atoms/MenuButton.vue";

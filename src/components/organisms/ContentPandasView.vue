@@ -26,7 +26,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
 import NormalButton from "@/components/atoms/NormalButton.vue";
-import ImportCsvArea from "@/components/organisms/ImportCsvArea.vue";
+import ImportCsvArea from "@/components/molecules/ImportCsvArea.vue";
 import { CsvType } from "@/types/types";
 import { dropFile } from "@/logic/csvCommon";
 
