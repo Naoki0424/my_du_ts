@@ -7,7 +7,6 @@
         'align-items-center': inputCsvList.length == 0,
       }"
       style="width: 1300px; height: 600px"
-      @dragenter="dragEnter"
       @dragenter.prevent
       @dragover.prevent
       @drop.prevent="dropCsvFile"
@@ -46,37 +45,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, ref, PropType } from "vue";
 import { CsvType } from "@/types/types";
-import { dropFile } from "@/logic/csvCommon";
 import NormalTable from "@/components/atoms/NormalTable.vue";
 import MenuButton from "@/components/atoms/MenuButton.vue";
 
 export default defineComponent({
   components: { NormalTable, MenuButton },
   name: "ImportCsvArea",
-  setup() {
-    // data
-    let inputCsvList = reactive<Array<CsvType>>([]);
-    let activeCsvTabIndex = ref(0);
+  props: {
+    inputCsvList: {
+      type: Array as PropType<CsvType[]>,
+      required: true
+    },
+    activeCsvTabIndex: {
+      type: Number,
+      default: 0,
+      required: true
 
+    }
+  },
+  emits: [
+    'dropCsvFile',
+    'changeCsvtab'
+  ],
+  setup(props, { emit }) {
     // method
-    const dropCsvFile = async (e: DragEvent) => {
-      const csv = await dropFile(e);
-      if (csv) {
-        inputCsvList.push(csv);
-      } else {
-        alert("エラーです");
-      }
-    };
-    const dragEnter = () => console.log("dragEnter");
-    const changeCsvtab = (index: number) => activeCsvTabIndex.value = index;
+    const dropCsvFile = (e: DragEvent) => emit('dropCsvFile', e);
+    const changeCsvtab = (index: number) => emit('changeCsvtab', index);
 
     return {
-      inputCsvList,
-      activeCsvTabIndex,
       dropCsvFile,
-      dragEnter,
       changeCsvtab,
     };
   },
