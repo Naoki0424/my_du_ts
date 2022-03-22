@@ -9,17 +9,23 @@
     role="tabpanel"
   >
     <h1>Pandas</h1>
-    <normal-button
-      :buttonText="'Select'"
-      :disable="false"
-      @click="clickSelect"
-    />
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <normal-button
+        :buttonText="'Select'"
+        :disable="false"
+        data-bs-toggle="modal"
+        data-bs-target="#selectModal"
+        :disabled="this.inputCsvList.length < 1"
+      />
+    </div>
     <import-csv-area
       @dropCsvFile="dropCsvFile"
       @changeCsvtab="changeCsvtab"
       :inputCsvList="inputCsvList"
-      :activeCsvTabIndex="activeCsvTabIndex"
+      :activeCsvTabIndex="refActiveCsvTabIndex"
     />
+
+    <SelectModal :modalId="'selectModal'" :title="'Select'" :inputCsvList="this.inputCsvList" />
   </div>
 </template>
 
@@ -27,6 +33,7 @@
 import { defineComponent, reactive, ref } from "vue";
 import NormalButton from "@/components/atoms/NormalButton.vue";
 import ImportCsvArea from "@/components/molecules/ImportCsvArea.vue";
+import SelectModal from "@/components/organisms/SelectModal.vue";
 import { CsvType } from "@/types/types";
 import { dropFile } from "@/logic/csvCommon";
 
@@ -35,6 +42,7 @@ export default defineComponent({
   components: {
     NormalButton,
     ImportCsvArea,
+    SelectModal,
   },
   props: {
     id: {
@@ -49,7 +57,7 @@ export default defineComponent({
   setup() {
     // data
     let inputCsvList = reactive<Array<CsvType>>([]);
-    let activeCsvTabIndex = ref(0);
+    let refActiveCsvTabIndex = ref(0);
 
     // method
     const dropCsvFile = async (e: DragEvent) => {
@@ -60,9 +68,16 @@ export default defineComponent({
         alert("エラーです");
       }
     };
-    const changeCsvtab = (index: number) => activeCsvTabIndex.value = index;
+    const changeCsvtab = (index: number) => (refActiveCsvTabIndex.value = index);
+    const clickSelectButton = () => console.log("clickSelectButton");
 
-    return { inputCsvList, dropCsvFile, activeCsvTabIndex, changeCsvtab };
+    return {
+      inputCsvList,
+      dropCsvFile,
+      refActiveCsvTabIndex,
+      changeCsvtab,
+      clickSelectButton,
+    };
   },
 });
 </script>
