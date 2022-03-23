@@ -30,7 +30,7 @@
               type="radio"
               name="radioForSelectCsv"
               :id="index"
-              @change="this.refSelectedCsv = index"
+              @change="changeCsvCheckbox(index)"
             />
             <label class="form-check-label" for="flexCheckDefault">
               {{ inputCsv.name }}
@@ -53,8 +53,13 @@
           </template>
         </div>
         <div class="modal-footer">
-          <NormalButton :buttonText="'Close'" data-bs-dismiss="modal"/>
-          <NormalButton :buttonText="'Go'" :disable="this.refSelectedCsv == -1"/>
+          <NormalButton :buttonText="'Close'" data-bs-dismiss="modal" />
+          <NormalButton
+            :buttonText="'Go'"
+            :disable="this.refSelectedCsv == -1"
+            :buttonType="'btn-primary'"
+            @click="executeSelect(inputCsvList[this.refSelectedCsv], this.selectedColumn)"
+          />
         </div>
       </div>
     </div>
@@ -66,11 +71,12 @@ import { defineComponent, PropType, computed, ref, reactive } from "vue";
 import { CsvType } from "@/types/types";
 import NormalButton from "@/components/atoms/NormalButton.vue";
 import { clickCheckbox } from "@/logic/clickEvent";
+import { outputCsv } from "@/logic/csvCommon";
 
 export default defineComponent({
   name: "SelectModal",
   components: {
-    NormalButton
+    NormalButton,
   },
   props: {
     title: {
@@ -86,19 +92,36 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ["selectCsvList"],
-  setup(props, { emit }) {
-    const selectedColumn = reactive([])
-    const selectCsvList = () => emit("selectCsvList");
+  setup(props) {
+    // data
+    const selectedColumn = reactive([]);
     const refSelectedCsv = ref(-1); // -1はデフォルト値。
+
+    // computed
     const columnOfSelectedCsv = computed(() => {
       if (refSelectedCsv.value == -1) {
         return [];
       }
       return props.inputCsvList[refSelectedCsv.value].header;
     });
+
+    // method
     const changeColumnCheckbox = clickCheckbox;
-    return { selectCsvList, refSelectedCsv, columnOfSelectedCsv, selectedColumn, changeColumnCheckbox };
+    const changeCsvCheckbox = (index: number) => {
+      refSelectedCsv.value = index;
+      selectedColumn.length = 0;
+    };
+    // const executeSelect = outputCsv(props.inputCsvList[refSelectedCsv.value], selectedColumn);
+    const executeSelect = outputCsv
+
+    return {
+      refSelectedCsv,
+      columnOfSelectedCsv,
+      selectedColumn,
+      changeColumnCheckbox,
+      changeCsvCheckbox,
+      executeSelect,
+    };
   },
 });
 </script>

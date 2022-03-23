@@ -1,10 +1,10 @@
 <template>
   <button
-      type="button"
-      class="btn btn-secondary"
-      :disabled="disable"
+    type="button"
+    :class="'btn' + ' ' + this.buttonType"
+    :disabled="disable"
   >
-    {{buttonText}}
+    {{ buttonText }}
   </button>
 </template>
 
@@ -16,12 +16,16 @@ export default defineComponent({
   props: {
     disable: {
       type: Boolean,
-      default: true
+      default: false,
     },
     buttonText: {
-        type: String,
-        default: "Default"
-    }
+      type: String,
+      default: "Default",
+    },
+    buttonType: {
+      type: String,
+      default: "btn-secondary",
+    },
   }
 });
 </script>
