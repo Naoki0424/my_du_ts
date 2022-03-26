@@ -25,32 +25,10 @@
             v-for="(inputCsv, index) in inputCsvList"
             :key="index"
           >
-            <input
-              class="form-check-input"
-              type="radio"
-              name="radioForSelectCsv"
-              :id="index"
-              @change="changeCsvCheckbox(index)"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              {{ inputCsv.name }}
-            </label>
+            <NormalRadio :index="index" :label="inputCsv.name" @click="changeCsvCheckbox" />
           </div>
           <h5 class="pt-3">出力する項目</h5>
-          <template v-for="(key, index) in columnOfSelectedCsv" :key="index">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                :key="key + index"
-                :id="index"
-                @change="changeColumnCheckbox(this.selectedColumn, key)"
-              />
-              <label class="form-check-label" for="flexCheckDefault">
-                {{ key }}
-              </label>
-            </div>
-          </template>
+          <GroupOfCheckbox :keyList="columnOfSelectedCsv" :selectedKeyList="selectedColumn" @changeCheckbox="changeColumnCheckbox"/>
         </div>
         <div class="modal-footer">
           <NormalButton :buttonText="'Close'" data-bs-dismiss="modal" />
@@ -70,6 +48,8 @@
 import { defineComponent, PropType, computed, ref, reactive } from "vue";
 import { CsvType } from "@/types/types";
 import NormalButton from "@/components/atoms/NormalButton.vue";
+import NormalRadio from "@/components/atoms/NormalRadio.vue";
+import GroupOfCheckbox from "@/components/molecules/GroupOfCheckbox.vue";
 import { clickCheckbox } from "@/logic/clickEvent";
 import { outputCsv } from "@/logic/csvCommon";
 
@@ -77,6 +57,8 @@ export default defineComponent({
   name: "SelectModal",
   components: {
     NormalButton,
+    NormalRadio,
+    GroupOfCheckbox,
   },
   props: {
     title: {
@@ -111,7 +93,6 @@ export default defineComponent({
       refSelectedCsv.value = index;
       selectedColumn.length = 0;
     };
-    // const executeSelect = outputCsv(props.inputCsvList[refSelectedCsv.value], selectedColumn);
     const executeSelect = outputCsv
 
     return {
