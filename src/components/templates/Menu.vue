@@ -22,11 +22,11 @@
     <div class="tab-content" id="tabContent1">
       <content-pandas-view
         :id="'pandas'"
-        :active="0 == refActiveContentTabIndex"
+        :active="tabContentType.PandasTab == refActiveContentTabIndex"
       />
     </div>
     <div class="tab-content" id="tabContent2">
-      <content-demo-view :id="'demo'" :active="1 == refActiveContentTabIndex" />
+      <content-demo-view :id="'demo'" :active="tabContentType.DemoTab == refActiveContentTabIndex" />
     </div>
   </div>
 </template>
