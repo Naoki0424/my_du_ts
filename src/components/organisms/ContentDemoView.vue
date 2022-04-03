@@ -11,6 +11,7 @@
     <h1>SQL</h1>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <normal-button :buttonText="'パッケージ'" />
+      <normal-button :buttonText="'テーブル追加'" />
       <normal-button :buttonText="'実行'" />
     </div>
     <div>
