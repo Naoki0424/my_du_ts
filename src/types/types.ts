@@ -13,3 +13,8 @@ export class CsvType{
     this.checked = checked
   }
 }
+
+export const tabContentType = {
+  PandasTab: 0,
+  DemoTab: 1
+}
