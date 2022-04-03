@@ -6,26 +6,50 @@
       role="tablist"
       aria-orientation="vertical"
     >
-      <menu-button :active=true :targetView="'pandas'" :buttonText="'Pandas'" />
-      <menu-button :active=false :targetView="'curl'" :buttonText="'Curl'" />
-      <menu-button :active=false :targetView="'flow'" :buttonText="'Flow'" />
+      <menu-button
+        :active="tabContentType.PandasTab == refActiveContentTabIndex"
+        :targetView="'pandas'"
+        :buttonText="'Pandas'"
+        @click="refActiveContentTabIndex = tabContentType.PandasTab"
+      />
+      <menu-button
+        :active="tabContentType.DemoTab == refActiveContentTabIndex"
+        :targetView="'demo'"
+        :buttonText="'デモ'"
+        @click="refActiveContentTabIndex = tabContentType.DemoTab"
+      />
     </div>
-    <div class="tab-content" id="tabContent">
-      <content-pandas-view :id="'pandas'" :active="true"/>
+    <div class="tab-content" id="tabContent1">
+      <content-pandas-view
+        :id="'pandas'"
+        :active="tabContentType.PandasTab == refActiveContentTabIndex"
+      />
+    </div>
+    <div class="tab-content" id="tabContent2">
+      <content-demo-view :id="'demo'" :active="tabContentType.DemoTab == refActiveContentTabIndex" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import MenuButton from "@/components/atoms/MenuButton.vue";
 import ContentPandasView from "@/components/organisms/ContentPandasView.vue";
+import ContentDemoView from "@/components/organisms/ContentDemoView.vue";
+import { tabContentType } from "@/types/types";
 
 export default defineComponent({
   name: "Menu",
   components: {
     MenuButton,
-    ContentPandasView
+    ContentPandasView,
+    ContentDemoView,
+  },
+  setup() {
+    // data
+    let refActiveContentTabIndex = ref(0);
+
+    return { refActiveContentTabIndex, tabContentType };
   },
 });
 </script>
