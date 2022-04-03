@@ -26,17 +26,18 @@
         />
         <normal-select-form :text="'FROM'" :items="tableList" class="p-2" />
         <div class="p-2" style="width: 300px">
-          <normal-button :buttonText="'検索条件追加'" />
+          <normal-button :buttonText="'検索条件追加'" @click="clickAddWhereCondition()"/>
         </div>
-        <group-of-where-condition :items="tableList"/>
-        <group-of-where-condition :items="tableList"/>
+        <div v-for="(value, index) in whereCondition[selectedTab]" :key="index">
+          <group-of-where-condition :items="tableList" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, reactive } from "vue";
 import NormalButton from "@/components/atoms/NormalButton.vue";
 import NormalSelectForm from "@/components/atoms/NormalSelectForm.vue";
 import GroupOfWhereCondition from "@/components/molecules/GroupOfWhereCondition.vue";
@@ -46,7 +47,7 @@ export default defineComponent({
   components: {
     NormalButton,
     NormalSelectForm,
-    GroupOfWhereCondition
+    GroupOfWhereCondition,
   },
   props: {
     id: {
@@ -59,9 +60,16 @@ export default defineComponent({
     },
   },
   setup() {
+    // data
     const columnList = ["*"];
     const tableList = ["tb_001", "tb_002", "tb_003", "tb_004"];
-    return { columnList, tableList };
+    let selectedTab = ref(0);
+    let whereCondition = reactive<Array<number>>([0]);
+
+    // method
+    const clickAddWhereCondition = () => whereCondition[selectedTab.value] += 1;
+
+    return { columnList, tableList, selectedTab, whereCondition, clickAddWhereCondition};
   },
 });
 </script>
