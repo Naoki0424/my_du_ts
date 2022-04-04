@@ -18,3 +18,13 @@ export const tabContentType = {
   PandasTab: 0,
   DemoTab: 1
 }
+
+export const comparisonOperatorList = [
+  "=",
+  "<>"
+]
+
+export const testColumnList = [
+  "col001",
+  "col002"
+]
