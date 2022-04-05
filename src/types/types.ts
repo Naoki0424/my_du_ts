@@ -20,7 +20,8 @@ export const tabContentType = {
 }
 
 export const comparisonOperatorList = [
-  "=",
+  "==",
+  "is not Null",
   "<>"
 ]
 

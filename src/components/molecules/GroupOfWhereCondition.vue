@@ -7,7 +7,7 @@
       <normal-select-form :items="items" :isLabel="false" :action="isFixed" style="width: 300px"/>
     </div>
     <normal-select-form :items="testColumnList" :isLabel="false" style="width: 300px" />
-    <normal-select-form :items="comparisonOperatorList" :isLabel="false" style="width: 100px" class="px-3"/>
+    <normal-select-form :items="comparisonOperatorList" :isLabel="false" style="width: 200px" class="px-3"/>
     <normal-textbox style="width: 300px" />
   </div>
 </template>

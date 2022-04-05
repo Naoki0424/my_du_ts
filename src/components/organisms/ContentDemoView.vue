@@ -71,12 +71,11 @@
             :class="{ 'show active': selectedTab == index + 1 }"
             :id="'tabContent' + (index + 1)"
           >
-            <div class="p-2 d-flex flex-row pb-3">
-              <div class="fs-3 text-left" style="width: 130px">Left join</div>
+            <div class="d-flex flex-row pb-3">
               <normal-select-form
                 :items="tableList"
-                :isLabel="false"
-                style="width: 300px"
+                :isLabel="true"
+                :text="'Left Join'"
               />
             </div>
             <normal-button
