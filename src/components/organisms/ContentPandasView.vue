@@ -10,7 +10,7 @@
   >
     <h1>Pandas</h1>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <normal-button
+      <NormalButton
         :buttonText="'Select'"
         :disable="false"
         data-bs-toggle="modal"
@@ -18,7 +18,7 @@
         :disabled="this.inputCsvList.length < 1"
       />
     </div>
-    <import-csv-area
+    <ImportCsvArea
       @dropCsvFile="dropCsvFile"
       @changeCsvtab="changeCsvtab"
       :inputCsvList="inputCsvList"

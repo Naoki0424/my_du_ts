@@ -10,16 +10,16 @@
   >
     <h1>SQL</h1>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <normal-button :buttonText="'パッケージ'" />
-      <normal-button
+      <NormalButton :buttonText="'パッケージ'" />
+      <NormalButton
         :buttonText="'結合テーブル追加'"
         @click="clickAddJoinCondition()"
       />
-      <normal-button :buttonText="'実行'" />
+      <NormalButton :buttonText="'実行'" />
     </div>
     <div>
       <div class="nav nav-tabs">
-        <menu-button
+        <MenuButton
           :active="true"
           :targetView="main"
           :index="0"
@@ -27,7 +27,7 @@
           @click="selectedTab = 0"
         />
         <template v-for="(num, index) in joinCondition" :key="index">
-          <menu-button
+          <MenuButton
             :active="false"
             :targetView="'sub' + (index + 1)"
             :index="1"
@@ -45,15 +45,15 @@
           :class="{ 'show active': selectedTab == 0 }"
           id="tabContent1"
         >
-          <normal-select-form
+          <NormalSelectForm
             :text="'SELECT'"
             :items="columnList"
             :action="true"
             class="p-2"
           />
-          <normal-select-form :text="'FROM'" :items="tableList" class="p-2" />
+          <NormalSelectForm :text="'FROM'" :items="tableList" class="p-2" />
           <div class="p-2" style="width: 300px">
-            <normal-button
+            <NormalButton
               :buttonText="'検索条件追加'"
               @click="clickAddWhereCondition()"
             />
@@ -62,7 +62,7 @@
             v-for="(value, index) in whereCondition[selectedTab]"
             :key="index"
           >
-            <group-of-where-condition :items="tableList" :isFixed="true" :selectedTableName="'tb_002'"/>
+            <GroupOfWhereCondition :items="tableList" :isFixed="true" :selectedTableName="'tb_002'"/>
           </div>
         </div>
         <template v-for="(num, index) in joinCondition" :key="index">
@@ -72,22 +72,22 @@
             :id="'tabContent' + (index + 1)"
           >
             <div class="d-flex flex-row pb-3">
-              <normal-select-form
+              <NormalSelectForm
                 :items="tableList"
                 :isLabel="true"
                 :text="'Left Join'"
               />
             </div>
-            <normal-button
+            <NormalButton
               :buttonText="'結合条件追加'"
               @click="clickAddWhereCondition()"
             />
-            <group-of-where-condition :items="tableList" class="pt-3" :isFixed="true"/>
+            <GroupOfWhereCondition :items="tableList" class="pt-3" :isFixed="true"/>
             <template
               v-for="(value, index) in whereCondition[selectedTab]"
               :key="index"
             >
-              <group-of-where-condition :items="tableList" :isFixed="true" />
+              <GroupOfWhereCondition :items="tableList" :isFixed="true" />
             </template>
           </div>
         </template>

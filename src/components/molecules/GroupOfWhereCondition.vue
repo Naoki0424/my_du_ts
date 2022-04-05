@@ -1,14 +1,14 @@
 <template>
   <div class="p-2 d-flex flex-row">
     <div v-if="isFixed">
-      <normal-select-form :items="items" :isLabel="false" :action="isFixed" style="width: 300px" :selectedText="selectedTableName"/>
+      <NormalSelectForm :items="items" :isLabel="false" :action="isFixed" style="width: 300px" :selectedText="selectedTableName"/>
     </div>
     <div v-else>
-      <normal-select-form :items="items" :isLabel="false" :action="isFixed" style="width: 300px"/>
+      <NormalSelectForm :items="items" :isLabel="false" :action="isFixed" style="width: 300px"/>
     </div>
-    <normal-select-form :items="testColumnList" :isLabel="false" style="width: 300px" />
-    <normal-select-form :items="comparisonOperatorList" :isLabel="false" style="width: 200px" class="px-3"/>
-    <normal-textbox style="width: 300px" />
+    <NormalSelectForm :items="testColumnList" :isLabel="false" style="width: 300px" />
+    <NormalSelectForm :items="comparisonOperatorList" :isLabel="false" style="width: 200px" class="px-3"/>
+    <NormalTextbox style="width: 300px" />
   </div>
 </template>
 

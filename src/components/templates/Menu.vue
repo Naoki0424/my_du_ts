@@ -5,13 +5,13 @@
       id="v-pills-tab"
       role="tablist"
     >
-      <menu-button
+      <MenuButton
         :active="tabContentType.PandasTab == refActiveContentTabIndex"
         :targetView="'pandas'"
         :buttonText="'Pandas'"
         @click="refActiveContentTabIndex = tabContentType.PandasTab"
       />
-      <menu-button
+      <MenuButton
         :active="tabContentType.DemoTab == refActiveContentTabIndex"
         :targetView="'demo'"
         :buttonText="'デモ'"
@@ -19,11 +19,11 @@
       />
     </div>
     <div class="tab-content">
-      <content-pandas-view
+      <ContentPandasView
         :id="'pandas'"
         :active="tabContentType.PandasTab == refActiveContentTabIndex"
       />
-      <content-demo-view :id="'demo'" :active="tabContentType.DemoTab == refActiveContentTabIndex" />
+      <ContentDemoView :id="'demo'" :active="tabContentType.DemoTab == refActiveContentTabIndex" />
     </div>
   </div>
 </template>

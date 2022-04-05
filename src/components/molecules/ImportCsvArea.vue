@@ -20,7 +20,7 @@
             v-for="(value, index) in inputCsvList"
             :key="index"
           >
-            <menu-button
+            <MenuButton
               :active="index == activeCsvTabIndex"
               :buttonText="value.name"
               :targetView="value.name + index"
@@ -30,7 +30,7 @@
           </li>
         </ul>
         <div class="tab-content">
-          <normal-table
+          <NormalTable
             class="tab-pane fade"
             :class="{ 'show active': index == activeCsvTabIndex }"
             :id="value.name + index"
