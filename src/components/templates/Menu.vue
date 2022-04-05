@@ -4,7 +4,6 @@
       class="nav nav-tabs flex-column nav-pills me-3"
       id="v-pills-tab"
       role="tablist"
-      aria-orientation="vertical"
     >
       <menu-button
         :active="tabContentType.PandasTab == refActiveContentTabIndex"
@@ -19,13 +18,11 @@
         @click="refActiveContentTabIndex = tabContentType.DemoTab"
       />
     </div>
-    <div class="tab-content" id="tabContent1">
+    <div class="tab-content">
       <content-pandas-view
         :id="'pandas'"
         :active="tabContentType.PandasTab == refActiveContentTabIndex"
       />
-    </div>
-    <div class="tab-content" id="tabContent2">
       <content-demo-view :id="'demo'" :active="tabContentType.DemoTab == refActiveContentTabIndex" />
     </div>
   </div>

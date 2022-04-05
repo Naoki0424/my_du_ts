@@ -4,7 +4,7 @@
       <label class="input-group-text">{{ text }}</label>
     </div>
     <select class="form-select" id="inputGroupSelect" :disabled="action">
-      <option v-for="(value, index) in items" value="index" :key="index">
+      <option v-for="(value, index) in items" value="index" :key="index" :selected="value == selectedText">
         {{ value }}
       </option>
     </select>
@@ -33,6 +33,10 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    selectedText: {
+      type: String,
+      default: 'XXXXXXXXXXXXXXXXXXXXXX'
+    }
   },
 });
 </script>
