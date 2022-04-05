@@ -1,14 +1,20 @@
 <template>
   <div class="p-2 d-flex flex-row">
     <div v-if="isFixed">
-      <NormalSelectForm :items="items" :isLabel="false" :action="isFixed" style="width: 300px" :selectedText="selectedTableName"/>
+      <NormalSelectForm :items="items" :isLabel="false" :action="isFixed" style="width: 200px" :selectedText="selectedTableName"/>
     </div>
     <div v-else>
-      <NormalSelectForm :items="items" :isLabel="false" :action="isFixed" style="width: 300px"/>
+      <NormalSelectForm :items="items" :isLabel="false" :action="isFixed" style="width: 200px"/>
     </div>
-    <NormalSelectForm :items="testColumnList" :isLabel="false" style="width: 300px" />
+    <NormalSelectForm :items="testColumnList" :isLabel="false" style="width: 200px" />
     <NormalSelectForm :items="comparisonOperatorList" :isLabel="false" style="width: 200px" class="px-3"/>
-    <NormalTextbox style="width: 300px" />
+    <template v-if="allFree">
+      <NormalTextbox style="width: 200px" />
+    </template>
+    <template v-else>
+      <NormalSelectForm :items="items" :isLabel="false" style="width: 200px"/>
+      <NormalSelectForm :items="testColumnList" :isLabel="false" style="width: 200px" />
+    </template>
   </div>
 </template>
 
@@ -36,6 +42,10 @@ export default defineComponent({
     selectedTableName: {
       type: String,
       required: false
+    },
+    allFree: {
+      type: Boolean,
+      default: false
     }
   },
   setup() {

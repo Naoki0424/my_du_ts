@@ -62,7 +62,7 @@
             v-for="(value, index) in whereCondition[selectedTab]"
             :key="index"
           >
-            <GroupOfWhereCondition :items="tableList" :isFixed="true" :selectedTableName="'tb_002'"/>
+            <GroupOfWhereCondition :items="tableList" :isFixed="true" :selectedTableName="'tb_002'" :allFree="true"/>
           </div>
         </div>
         <template v-for="(num, index) in joinCondition" :key="index">
