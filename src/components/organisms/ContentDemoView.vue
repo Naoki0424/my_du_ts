@@ -8,9 +8,9 @@
     :id="id"
     role="tabpanel"
   >
-    <h1>SQL</h1>
+    <h1>SQL（システム開発チームのみ使用可能な画面）</h1>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <NormalButton :buttonText="'パッケージ'" />
+      <!-- <NormalButton :buttonText="'パッケージ'" /> -->
       <NormalButton
         :buttonText="'結合テーブル追加'"
         @click="clickAddJoinCondition()"

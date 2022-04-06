@@ -14,9 +14,23 @@ export class CsvType{
   }
 }
 
+export interface PackageCardType {
+  title: string;
+  text: string;
+}
+
+export class PackageCardType {
+  constructor(title: string, text: string) {
+    this.title = title
+    this.text = text
+  }
+}
+
 export const tabContentType = {
-  PandasTab: 0,
-  DemoTab: 1
+  DemoTab: 0,
+  PackageTab: 1,
+  PandasTab: 2
+  
 }
 
 export const comparisonOperatorList = [
